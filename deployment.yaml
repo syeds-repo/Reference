@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: power-deployment
+spec:
+  selector:
+    matchLabels:
+      run: power-management
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: power-management
+    spec:
+      containers:
+        - name: power-inference
+          image: powermanager:latest 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+              protocol: TCP 
